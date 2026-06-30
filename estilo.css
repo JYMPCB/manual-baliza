@@ -18,7 +18,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: var(--text);
   line-height: 1.55;
   background:
@@ -69,6 +69,38 @@ h1 {
   box-shadow: 0 10px 30px rgba(57,189,248,.2);
 }
 
+.quickstart {
+  width: min(1120px, calc(100% - 2rem));
+  margin: -1.25rem auto 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.quickstart article {
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(4, 17, 29, .62);
+  border: 1px solid rgba(91,188,255,.20);
+  box-shadow: var(--shadow);
+}
+
+.quickstart b {
+  width: 1.9rem;
+  height: 1.9rem;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--orange);
+  color: #fff;
+  margin-bottom: .55rem;
+}
+
+.quickstart p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
 .menu {
   position: sticky;
   top: 0;
@@ -76,10 +108,16 @@ h1 {
   display: flex;
   gap: .7rem;
   overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   padding: .8rem max(1rem, calc((100vw - 1120px) / 2));
   background: rgba(6,19,33,.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
+}
+
+.menu::-webkit-scrollbar {
+  display: none;
 }
 
 .menu a {
@@ -240,10 +278,15 @@ footer {
 }
 
 @media (max-width: 860px) {
+  .quickstart,
   .steps,
   .two,
   .modes {
     grid-template-columns: 1fr;
+  }
+
+  .quickstart {
+    margin-top: 0;
   }
 
   .hero {
