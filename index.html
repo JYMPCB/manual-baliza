@@ -1,691 +1,230 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Manual | Baliza Smart para Cono</title>
-
-  <style>
-    :root {
-      --fondo: #071522;
-      --fondo-secundario: #0d2134;
-      --tarjeta: #102b43;
-      --azul: #36b8ff;
-      --naranja: #ff6b3d;
-      --verde: #51d86a;
-      --texto: #eef7ff;
-      --texto-suave: #b8cad9;
-      --borde: rgba(89, 183, 255, 0.28);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        linear-gradient(rgba(7, 21, 34, 0.93), rgba(7, 21, 34, 0.98)),
-        repeating-linear-gradient(
-          -45deg,
-          rgba(255,255,255,0.025) 0,
-          rgba(255,255,255,0.025) 1px,
-          transparent 1px,
-          transparent 7px
-        );
-      color: var(--texto);
-      line-height: 1.55;
-    }
-
-    header {
-      padding: 56px 20px 42px;
-      text-align: center;
-      background: linear-gradient(180deg, rgba(24, 58, 86, 0.95), rgba(7, 21, 34, 0.2));
-      border-bottom: 1px solid var(--borde);
-    }
-
-    .logo {
-      display: inline-block;
-      font-size: 14px;
-      letter-spacing: 2px;
-      color: var(--azul);
-      font-weight: bold;
-      margin-bottom: 14px;
-    }
-
-    h1 {
-      margin: 0;
-      color: var(--naranja);
-      font-size: clamp(30px, 5vw, 48px);
-      letter-spacing: 1px;
-    }
-
-    .subtitulo {
-      max-width: 680px;
-      margin: 16px auto 0;
-      color: var(--texto-suave);
-      font-size: 18px;
-    }
-
-    .boton-principal {
-      display: inline-block;
-      margin-top: 28px;
-      padding: 13px 22px;
-      border-radius: 10px;
-      background: var(--azul);
-      color: #04121d;
-      text-decoration: none;
-      font-weight: bold;
-      transition: transform 0.2s ease;
-    }
-
-    .boton-principal:hover {
-      transform: translateY(-2px);
-    }
-
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      background: rgba(7, 21, 34, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--borde);
-    }
-
-    .nav-contenido {
-      width: min(1120px, calc(100% - 32px));
-      margin: auto;
-      display: flex;
-      gap: 18px;
-      overflow-x: auto;
-      padding: 13px 0;
-    }
-
-    nav a {
-      color: var(--texto-suave);
-      text-decoration: none;
-      white-space: nowrap;
-      font-size: 14px;
-    }
-
-    nav a:hover {
-      color: var(--azul);
-    }
-
-    main {
-      width: min(1120px, calc(100% - 32px));
-      margin: auto;
-      padding: 42px 0 58px;
-    }
-
-    section {
-      margin-bottom: 36px;
-      scroll-margin-top: 70px;
-    }
-
-    .titulo-seccion {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      color: var(--azul);
-      font-size: 24px;
-    }
-
-    .titulo-seccion span {
-      display: inline-grid;
-      place-items: center;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: rgba(54, 184, 255, 0.14);
-      border: 1px solid var(--borde);
-      font-size: 16px;
-    }
-
-    .tarjeta {
-      background: rgba(16, 43, 67, 0.92);
-      border: 1px solid var(--borde);
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .paso {
-      padding: 18px;
-      border-radius: 12px;
-      background: rgba(4, 18, 29, 0.45);
-      border: 1px solid rgba(89, 183, 255, 0.18);
-    }
-
-    .numero {
-      display: inline-grid;
-      place-items: center;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: var(--naranja);
-      color: white;
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    h2, h3 {
-      margin-top: 0;
-    }
-
-    h3 {
-      color: var(--texto);
-      margin-bottom: 8px;
-    }
-
-    p {
-      margin: 0 0 12px;
-    }
-
-    p:last-child {
-      margin-bottom: 0;
-    }
-
-    ul, ol {
-      margin: 12px 0 0;
-      padding-left: 22px;
-    }
-
-    li {
-      margin-bottom: 8px;
-    }
-
-    .destacado {
-      border-left: 4px solid var(--azul);
-      background: rgba(54, 184, 255, 0.08);
-      padding: 15px 17px;
-      border-radius: 0 10px 10px 0;
-      color: var(--texto-suave);
-      margin-top: 18px;
-    }
-
-    .advertencia {
-      border-left-color: var(--naranja);
-      background: rgba(255, 107, 61, 0.09);
-    }
-
-    .modo {
-      padding: 18px;
-      border-radius: 12px;
-      background: rgba(4, 18, 29, 0.45);
-      border: 1px solid rgba(89, 183, 255, 0.18);
-    }
-
-    .modo h3 {
-      color: var(--azul);
-    }
-
-    .modo.eco h3 {
-      color: var(--verde);
-    }
-
-    .modo.full h3 {
-      color: var(--naranja);
-    }
-
-    .captura {
-      margin-top: 18px;
-      min-height: 190px;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 20px;
-      border-radius: 12px;
-      border: 1px dashed rgba(89, 183, 255, 0.5);
-      background: rgba(4, 18, 29, 0.42);
-      color: var(--texto-suave);
-    }
-
-    .captura strong {
-      color: var(--azul);
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .codigo {
-      display: inline-block;
-      margin: 8px 0;
-      padding: 8px 12px;
-      border-radius: 8px;
-      background: #06111b;
-      border: 1px solid rgba(89, 183, 255, 0.28);
-      color: var(--verde);
-      font-family: Consolas, monospace;
-      font-size: 15px;
-    }
-
-    .tabla {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-      overflow: hidden;
-      border-radius: 10px;
-    }
-
-    .tabla th,
-    .tabla td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid rgba(89, 183, 255, 0.15);
-    }
-
-    .tabla th {
-      color: var(--azul);
-      background: rgba(4, 18, 29, 0.5);
-    }
-
-    .tabla tr:last-child td {
-      border-bottom: none;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      border-top: 1px solid var(--borde);
-      color: #7890a5;
-      font-size: 14px;
-    }
-
-    @media (max-width: 760px) {
-      header {
-        padding: 42px 18px 34px;
-      }
-
-      .grid,
-      .grid-3 {
-        grid-template-columns: 1fr;
-      }
-
-      .tarjeta {
-        padding: 19px;
-      }
-
-      .titulo-seccion {
-        font-size: 21px;
-      }
-
-      .tabla {
-        font-size: 14px;
-      }
-    }
-  </style>
-
+  <link rel="stylesheet" href="estilo.css" />
 </head>
 
 <body>
-
-  <header>
-    <div class="logo">BALIZA VIAL</div>
+  <header class="hero">
+    <div class="badge">🚨 BALIZA VIAL 🚨</div>
     <h1>Baliza Smart para Cono</h1>
-    <p class="subtitulo">
-      Manual de uso rápido para conexión, operación de la aplicación web
-      y configuración de secuencias luminosas.
-    </p>
-    <a class="boton-principal" href="#conexion">Ver guía rápida</a>
+    <p>Manual de uso rápido para conexión, operación de la app web y configuración de secuencias luminosas.</p>
+    <a class="btn" href="#conexion">Ver guía rápida</a>
   </header>
 
-  <nav>
-    <div class="nav-contenido">
-      <a href="#conexion">Conexión</a>
-      <a href="#inicio">Pantalla de inicio</a>
-      <a href="#wifi">Configuración Wi-Fi</a>
-      <a href="#avanzado">Secuencia avanzada</a>
-      <a href="#cuidados">Cuidados</a>
-    </div>
+  <nav class="menu">
+    <a href="#conexion">Conexión</a>
+    <a href="#inicio">Inicio</a>
+    <a href="#modos">Modos</a>
+    <a href="#wifi">Wi‑Fi</a>
+    <a href="#avanzado">Avanzado</a>
+    <a href="#cuidados">Cuidados</a>
   </nav>
 
   <main>
+    <section id="conexion" class="card">
+      <h2><span>1</span> Conexión inicial</h2>
+      <p>La baliza crea su propia red Wi‑Fi para que pueda ser controlada desde un celular, tablet o computadora. No hace falta instalar ninguna aplicación.</p>
 
-```
-<section id="conexion">
-  <h2 class="titulo-seccion"><span>1</span> Conexión inicial</h2>
-
-  <div class="tarjeta">
-    <p>
-      La baliza crea su propia red Wi-Fi para que pueda ser controlada desde
-      un celular, tablet o computadora. No es necesario instalar ninguna aplicación.
-    </p>
-
-    <div class="grid" style="margin-top: 18px;">
-      <div class="paso">
-        <div class="numero">1</div>
-        <h3>Encienda la baliza</h3>
-        <p>Espere unos segundos hasta que el equipo complete el encendido.</p>
+      <div class="steps">
+        <article>
+          <b>1</b>
+          <h3>Encienda la baliza</h3>
+          <p>Espere unos segundos hasta que el equipo complete el encendido.</p>
+        </article>
+        <article>
+          <b>2</b>
+          <h3>Conéctese al Wi‑Fi</h3>
+          <p>Active Wi‑Fi en el celular y seleccione la red de la baliza.</p>
+        </article>
+        <article>
+          <b>3</b>
+          <h3>Abra el navegador</h3>
+          <p>Ingrese directamente en la barra superior:</p>
+          <code>http://192.168.4.1/</code>
+        </article>
+        <article>
+          <b>4</b>
+          <h3>Controle la baliza</h3>
+          <p>Se abrirá la aplicación web con las funciones disponibles.</p>
+        </article>
       </div>
 
-      <div class="paso">
-        <div class="numero">2</div>
-        <h3>Conéctese al Wi-Fi</h3>
-        <p>Desde el celular, active Wi-Fi y seleccione la red de la baliza.</p>
+      <div class="alert">
+        <strong>Importante:</strong> el teléfono puede indicar que la red “no tiene Internet”. Es normal: esa red se utiliza solamente para comunicarse con la baliza.
+      </div>
+    </section>
+
+    <section id="inicio" class="card">
+      <h2><span>2</span> Pantalla de inicio</h2>
+      <p>Desde la pantalla de inicio se consulta la batería, se regula el brillo y se aplica una secuencia rápida.</p>
+
+      <div class="two">
+        <div>
+          <h3>Estado de batería</h3>
+          <ul>
+            <li><strong>Voltaje:</strong> tensión actual de la batería.</li>
+            <li><strong>Corriente:</strong> consumo instantáneo.</li>
+            <li><strong>Potencia:</strong> energía usada en ese momento.</li>
+            <li><strong>Carga:</strong> porcentaje aproximado disponible.</li>
+            <li><strong>Tiempo restante:</strong> autonomía estimada según el uso actual.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Control de brillo</h3>
+          <p>Permite ajustar la intensidad general de los LEDs. Menor brillo aumenta la autonomía; mayor brillo mejora la visibilidad.</p>
+        </div>
       </div>
 
-      <div class="paso">
-        <div class="numero">3</div>
-        <h3>Abra el navegador</h3>
-        <p>Ingrese esta dirección directamente en la barra superior:</p>
-        <div class="codigo">http://192.168.4.1/</div>
+      <div class="placeholder">Captura sugerida: pantalla de inicio</div>
+    </section>
+
+    <section id="modos" class="card">
+      <h2><span>3</span> Secuencia rápida</h2>
+      <p>Seleccione un modo, elija un perfil de color y presione <strong>Aplicar</strong>.</p>
+
+      <div class="modes">
+        <article class="mode">
+          <h3>Inicial</h3>
+          <p>Modo de arranque predeterminado. Ejecuta tres secuencias genéricas de destello.</p>
+        </article>
+        <article class="mode eco">
+          <h3>Eco</h3>
+          <p>Modo de bajo consumo. Optimizado para maximizar la autonomía de la batería.</p>
+        </article>
+        <article class="mode full">
+          <h3>Full</h3>
+          <p>Modo de alta luminosidad. Ofrece mayor intensidad de señalización, con consumo superior.</p>
+        </article>
       </div>
 
-      <div class="paso">
-        <div class="numero">4</div>
-        <h3>Controle la baliza</h3>
-        <p>Se abrirá la aplicación web con todas las funciones disponibles.</p>
-      </div>
-    </div>
+      <h3>Perfiles de color</h3>
+      <p>Los perfiles disponibles son: <strong>Bomberos</strong>, <strong>Policía</strong>, <strong>Vialidad</strong> y <strong>Ambulancia</strong>.</p>
+    </section>
 
-    <div class="destacado advertencia">
-      <strong>Importante:</strong> el teléfono puede mostrar que la red “no tiene Internet”.
-      Es normal: esa red se utiliza únicamente para comunicarse con la baliza.
-      Mantenga la conexión activa.
-    </div>
-  </div>
-</section>
+    <section id="wifi" class="card">
+      <h2><span>4</span> Configuración Wi‑Fi</h2>
+      <p>Esta función permite conectar la baliza a una red Wi‑Fi existente. Es opcional: el equipo también puede usarse desde su propia red.</p>
 
-<section id="inicio">
-  <h2 class="titulo-seccion"><span>2</span> Pantalla de inicio</h2>
+      <ol>
+        <li>Ingrese a la pestaña <strong>Configuración</strong>.</li>
+        <li>Presione <strong>Escanear redes</strong>.</li>
+        <li>Seleccione la red Wi‑Fi disponible.</li>
+        <li>Ingrese la contraseña.</li>
+        <li>Espere la confirmación de conexión.</li>
+      </ol>
 
-  <div class="tarjeta">
-    <p>
-      La pantalla de inicio permite consultar el estado de la batería,
-      regular el brillo y seleccionar una secuencia rápida.
-    </p>
-
-    <div class="grid" style="margin-top: 18px;">
-      <div>
-        <h3>Estado de batería</h3>
-        <ul>
-          <li><strong>Voltaje:</strong> tensión actual de la batería.</li>
-          <li><strong>Corriente:</strong> consumo instantáneo del equipo.</li>
-          <li><strong>Potencia:</strong> energía utilizada en ese momento.</li>
-          <li><strong>Carga:</strong> porcentaje aproximado de batería disponible.</li>
-          <li><strong>Tiempo restante:</strong> estimación de autonomía según el uso actual.</li>
-        </ul>
+      <div class="two">
+        <div class="mini">
+          <h3>Desconectar</h3>
+          <p>Corta la conexión actual de la baliza a la red seleccionada.</p>
+        </div>
+        <div class="mini">
+          <h3>Olvidar red</h3>
+          <p>Elimina los datos guardados de esa red Wi‑Fi.</p>
+        </div>
       </div>
 
-      <div>
-        <h3>Control de brillo</h3>
-        <p>
-          Use la barra de brillo para ajustar la intensidad general de los LEDs.
-        </p>
-        <ul>
-          <li>Menor brillo: mayor autonomía.</li>
-          <li>Mayor brillo: mejor visibilidad con luz ambiente intensa.</li>
-          <li>Para uso nocturno se recomienda un brillo medio o bajo.</li>
-        </ul>
-      </div>
-    </div>
+      <div class="placeholder">Captura sugerida: configuración Wi‑Fi</div>
+    </section>
 
-    <div class="captura">
-      <div>
-        <strong>CAPTURA: Pantalla de inicio</strong>
-        Más adelante agregaremos aquí la imagen real de la aplicación.
-      </div>
-    </div>
-  </div>
-</section>
+    <section id="avanzado" class="card">
+      <h2><span>5</span> Secuencia avanzada</h2>
+      <p>Permite crear una secuencia personalizada de destellos, colores y movimientos. La baliza ejecuta los pasos en el orden configurado.</p>
 
-<section id="modos">
-  <h2 class="titulo-seccion"><span>3</span> Secuencia rápida</h2>
-
-  <div class="tarjeta">
-    <p>
-      La sección <strong>Secuencia rápida</strong> permite cambiar la señalización
-      en pocos segundos. Seleccione un modo, elija un perfil de color y presione
-      <strong>Aplicar</strong>.
-    </p>
-
-    <div class="grid-3" style="margin-top: 18px;">
-      <div class="modo">
-        <h3>Inicial</h3>
-        <p>
-          Modo de arranque predeterminado. Ejecuta tres secuencias genéricas
-          de destello para comenzar a utilizar la baliza inmediatamente.
-        </p>
+      <div class="two">
+        <div>
+          <h3>Campos de cada paso</h3>
+          <ul>
+            <li><strong>Patrón:</strong> tipo de efecto luminoso.</li>
+            <li><strong>Velocidad:</strong> rapidez de la animación.</li>
+            <li><strong>Duración:</strong> tiempo de reproducción del paso.</li>
+            <li><strong>Color:</strong> color utilizado por el efecto.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Cómo aplicarla</h3>
+          <ol>
+            <li>Configure el Paso 1.</li>
+            <li>Presione <strong>+ Agregar paso</strong> si desea sumar otro efecto.</li>
+            <li>Repita el proceso.</li>
+            <li>Presione <strong>Aplicar secuencia avanzada</strong>.</li>
+          </ol>
+        </div>
       </div>
 
-      <div class="modo eco">
-        <h3>Eco</h3>
-        <p>
-          Modo de bajo consumo. Utiliza una secuencia optimizada para maximizar
-          la autonomía de la batería.
-        </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Paso</th>
+            <th>Patrón</th>
+            <th>Velocidad</th>
+            <th>Duración</th>
+            <th>Color</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Recorrido</td>
+            <td>Muy rápido</td>
+            <td>6 s</td>
+            <td>Naranja</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Recorrido</td>
+            <td>Muy rápido</td>
+            <td>6 s</td>
+            <td>Blanco</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Expansión desde lados</td>
+            <td>Normal</td>
+            <td>8 s</td>
+            <td>Naranja</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="placeholder">Captura sugerida: secuencia avanzada</div>
+    </section>
+
+    <section id="cuidados" class="card">
+      <h2><span>6</span> Recomendaciones de uso</h2>
+
+      <div class="two">
+        <div>
+          <h3>Antes de utilizar</h3>
+          <ul>
+            <li>Verifique la carga de batería.</li>
+            <li>Asegure que la baliza quede correctamente montada sobre el cono.</li>
+            <li>Mantenga limpia la zona de LEDs.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Durante el uso</h3>
+          <ul>
+            <li>Reduzca el brillo cuando necesite mayor autonomía.</li>
+            <li>Use el modo rápido para cambios simples.</li>
+            <li>Use el modo avanzado para efectos personalizados.</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="modo full">
-        <h3>Full</h3>
-        <p>
-          Modo de alta luminosidad. Ofrece la mayor intensidad de señalización,
-          con un consumo de batería superior.
-        </p>
+      <div class="alert">
+        No cargue la baliza si el conector está mojado o sucio. Utilice cables y cargadores USB en buen estado.
       </div>
-    </div>
-
-    <div class="grid" style="margin-top: 18px;">
-      <div>
-        <h3>Perfiles de color</h3>
-        <p>Seleccione el perfil que mejor se adapte a la señalización requerida:</p>
-        <ul>
-          <li>Bomberos</li>
-          <li>Policía</li>
-          <li>Vialidad</li>
-          <li>Ambulancia</li>
-        </ul>
-      </div>
-
-      <div>
-        <h3>Aplicar configuración</h3>
-        <p>
-          Luego de seleccionar el modo y el perfil de color, presione:
-        </p>
-        <div class="codigo">▶ Aplicar</div>
-        <p>
-          La baliza cambiará a la configuración elegida.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="wifi">
-  <h2 class="titulo-seccion"><span>4</span> Configuración Wi-Fi</h2>
-
-  <div class="tarjeta">
-    <p>
-      Esta sección permite conectar la baliza a una red Wi-Fi existente.
-      Es una función opcional: el equipo puede utilizarse directamente desde su propia red Wi-Fi.
-    </p>
-
-    <ol>
-      <li>Ingrese a la pestaña <strong>Configuración</strong>.</li>
-      <li>Presione <strong>Escanear redes</strong>.</li>
-      <li>Seleccione la red Wi-Fi disponible.</li>
-      <li>Ingrese la contraseña correspondiente.</li>
-      <li>Espere la confirmación de conexión.</li>
-    </ol>
-
-    <div class="grid" style="margin-top: 18px;">
-      <div class="paso">
-        <h3>Desconectar</h3>
-        <p>
-          Corta la conexión actual de la baliza a la red seleccionada.
-          Úselo cuando quiera cambiar de red o volver al funcionamiento local.
-        </p>
-      </div>
-
-      <div class="paso">
-        <h3>Olvidar red</h3>
-        <p>
-          Elimina del equipo los datos guardados de esa red Wi-Fi.
-          Es útil si cambió la contraseña o si la baliza será utilizada en otro lugar.
-        </p>
-      </div>
-    </div>
-
-    <div class="destacado">
-      Cuando la conexión sea correcta, la pantalla mostrará el estado:
-      <strong>Conectado a [nombre de red]</strong>.
-    </div>
-
-    <div class="captura">
-      <div>
-        <strong>CAPTURA: Configuración Wi-Fi</strong>
-        Más adelante agregaremos aquí la imagen real de esta sección.
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="avanzado">
-  <h2 class="titulo-seccion"><span>5</span> Secuencia avanzada</h2>
-
-  <div class="tarjeta">
-    <p>
-      El modo avanzado permite crear una secuencia personalizada de destellos,
-      colores y movimientos. La baliza ejecutará los pasos en el orden configurado.
-    </p>
-
-    <div class="grid" style="margin-top: 18px;">
-      <div>
-        <h3>Campos de cada paso</h3>
-        <ul>
-          <li><strong>Patrón:</strong> tipo de efecto luminoso.</li>
-          <li><strong>Velocidad:</strong> rapidez de la animación.</li>
-          <li><strong>Duración:</strong> tiempo de reproducción del paso.</li>
-          <li><strong>Color:</strong> color utilizado por el efecto.</li>
-        </ul>
-      </div>
-
-      <div>
-        <h3>Patrones disponibles</h3>
-        <ul>
-          <li><strong>Recorrido (chase):</strong> el efecto se desplaza alrededor de la baliza.</li>
-          <li><strong>Expansión desde lados:</strong> la luz se expande desde los laterales.</li>
-        </ul>
-      </div>
-    </div>
-
-    <h3 style="margin-top: 24px;">Crear una secuencia</h3>
-    <ol>
-      <li>Configure el patrón, velocidad, duración y color del Paso 1.</li>
-      <li>Presione <strong>+ Agregar paso</strong> para incorporar otro efecto.</li>
-      <li>Repita el proceso hasta completar la secuencia deseada.</li>
-      <li>Presione <strong>Aplicar secuencia avanzada</strong>.</li>
-    </ol>
-
-    <div class="destacado advertencia">
-      Los cambios no se aplican hasta presionar
-      <strong>Aplicar secuencia avanzada</strong>.
-    </div>
-
-    <h3 style="margin-top: 24px;">Ejemplo de secuencia</h3>
-
-    <table class="tabla">
-      <thead>
-        <tr>
-          <th>Paso</th>
-          <th>Patrón</th>
-          <th>Velocidad</th>
-          <th>Duración</th>
-          <th>Color</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Recorrido</td>
-          <td>Muy rápido</td>
-          <td>6 s</td>
-          <td>Naranja</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Recorrido</td>
-          <td>Muy rápido</td>
-          <td>6 s</td>
-          <td>Blanco</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Expansión desde lados</td>
-          <td>Normal</td>
-          <td>8 s</td>
-          <td>Naranja</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="captura">
-      <div>
-        <strong>CAPTURA: Secuencia avanzada</strong>
-        Más adelante agregaremos aquí la imagen real del modo avanzado.
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="cuidados">
-  <h2 class="titulo-seccion"><span>6</span> Recomendaciones de uso</h2>
-
-  <div class="tarjeta">
-    <div class="grid">
-      <div>
-        <h3>Antes de utilizar</h3>
-        <ul>
-          <li>Verifique la carga de batería antes de comenzar una jornada.</li>
-          <li>Asegúrese de que la baliza quede correctamente montada sobre el cono.</li>
-          <li>Mantenga limpia la zona de iluminación LED.</li>
-        </ul>
-      </div>
-
-      <div>
-        <h3>Durante el uso</h3>
-        <ul>
-          <li>Reduzca el brillo cuando necesite mayor autonomía.</li>
-          <li>Utilice el modo rápido para cambios simples de señalización.</li>
-          <li>Utilice el modo avanzado para crear efectos personalizados.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="destacado advertencia">
-      No cargue la baliza si el conector está mojado o sucio.
-      Utilice siempre cables y cargadores USB en buen estado.
-    </div>
-  </div>
-</section>
-```
-
+    </section>
   </main>
 
   <footer>
-    Baliza Smart para Cono · Manual de uso online<br>
+    Baliza Smart para Cono · Manual de uso online<br />
     Versión inicial del manual
   </footer>
-
 </body>
 </html>
