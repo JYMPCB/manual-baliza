@@ -306,15 +306,32 @@ footer {
 
 .captura-app {
   margin-top: 1.1rem;
+  width: min(760px, 100%);
+  margin-left: auto;
+  margin-right: auto;
   padding: .7rem;
   border-radius: 1rem;
   background: rgba(4,17,29,.55);
   border: 1px solid rgba(91,188,255,.24);
+  overflow: hidden;
 }
 
 .captura-app img {
   width: 100%;
+  height: min(34vw, 320px);
+  object-fit: cover;
+  object-position: top center;
   display: block;
   border-radius: .75rem;
   border: 1px solid rgba(255,255,255,.08);
+}
+
+@media (max-width: 860px) {
+  .captura-app {
+    width: 100%;
+  }
+
+  .captura-app img {
+    height: min(52vw, 260px);
+  }
 }
